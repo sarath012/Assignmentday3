@@ -1,0 +1,16 @@
+table, th, td {
+    border: 1px solid black;
+  }
+
+.usertable{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.userlist{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10vh;
+    width: fit-content;
+}
