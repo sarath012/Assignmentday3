@@ -5,7 +5,7 @@ import './Newuser.css';
 export default function Newuser() {
 
     const rows = data.map((user) =>
-        <tr>
+        <tr key={user.id}>
             <td>{user.username}</td>
             <td>{user.email}</td>
             <td>{user.name.firstname} {user.name.lastname}</td>
@@ -21,8 +21,12 @@ export default function Newuser() {
             <thead>
                 <tr>
                     <th>Username</th>
-                    <th>Email</th>
-                    <th>Name</th>
+                    <th>Email  
+                        <button>sort email</button>
+                    </th>
+                    <th>Name  
+                        <button>sort name</button>
+                    </th>
                     <th>Phone number</th>
                 </tr>   
             </thead>
