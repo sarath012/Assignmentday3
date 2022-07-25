@@ -1,13 +1,43 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import products from '../Objects/products.json'
 
 export default function Products() {
+    const [sampleProducts, setSampleProducts] = useState(products)
     const [titleFilter, setTitleFilter] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');
+    const [titleAsc, setTitleAsc] = useState(true);
+    const [categoryAsc, setCategoryAsc] = useState(true);
 
-    const productrows = products
-        .filter((product) => ((product.title.toLowerCase()).includes(titleFilter) || titleFilter === ''))
-        .filter((product) => ((product.category.toLowerCase()).includes(categoryFilter) || categoryFilter === ''))
+    useEffect(()=>{
+        handleTitleSortAsc()
+    },[])
+
+    function handleTitleSortAsc(){
+        const titleSortedAsc = [...sampleProducts].sort((a,b)=>a.title > b.title ? 1 : -1)
+        setSampleProducts(titleSortedAsc)
+        setTitleAsc(!titleAsc)
+    }
+
+    function handleTitleSortDesc(){
+        const titleSortedDesc = [...sampleProducts].sort((a,b)=>a.title > b.title ? -1 : 1)
+        setSampleProducts(titleSortedDesc)
+        setTitleAsc(!titleAsc)
+    }
+    function handleCategorySortAsc(){
+        const categorySortedAsc = [...sampleProducts].sort((a,b)=>a.category > b.category ? 1 : -1)
+        setSampleProducts(categorySortedAsc)
+        setCategoryAsc(!categoryAsc)
+    }
+
+    function handleCategorySortDesc(){
+        const categorySortedDesc = [...sampleProducts].sort((a,b)=>a.category > b.category ? -1 : 1)
+        setSampleProducts(categorySortedDesc)
+        setCategoryAsc(!categoryAsc)
+    }
+
+    const productrows = [...sampleProducts]
+        // .filter((product) => ((product.title.toLowerCase()).includes(titleFilter) || titleFilter === ''))
+        // .filter((product) => ((product.category.toLowerCase()).includes(categoryFilter) || categoryFilter === ''))
         .map((product) =>
             <tr key={product.id}>
                 <td>{product.title}</td>
@@ -32,8 +62,20 @@ export default function Products() {
       <table>
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Category</th>
+                    <th>Title
+                    {titleAsc ? (
+                            <button onClick={handleTitleSortAsc}>sort Title ↑</button>
+                        ):(
+                            <button onClick={handleTitleSortDesc}>sort Title ↓</button>
+                        )}
+                    </th>
+                    <th>Category
+                    {categoryAsc ? (
+                            <button onClick={handleCategorySortAsc}>sort Category ↑</button>
+                        ):(
+                            <button onClick={handleCategorySortDesc}>sort Category ↓</button>
+                        )}
+                    </th>
                     <th>Price</th>
                     <th>Rating</th>
                 </tr>   

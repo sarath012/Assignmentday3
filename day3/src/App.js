@@ -9,9 +9,9 @@ function App() {
     <div className="App">
 
       {/* <User/> */}
-      <Newuser/>
-
-      {/* <Products/> */}
+      {/* <Newuser/> */}
+      
+      <Products/>
 
     </div>
   );
